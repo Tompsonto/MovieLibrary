@@ -1,22 +1,27 @@
 <template>
  <div class="slide">
-      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.wallpapersden.com%2Fimage%2Fdownload%2Ftenet-movie_68298_2764x4096.jpg&f=1&nofb=1">
+      <img  v-if="feed.poster_path != null" :src="'https://image.tmdb.org/t/p/w1280/'+ feed.poster_path">
+      <img  v-else-if="feed.profile_path != null" :src="'https://image.tmdb.org/t/p/w1280/'+ feed.profile_path">
+      <img  v-else class="placeholder" src="../assets/placeholder.png">
+
     <div class="slide__content">
-      <span class="slide__content__title">TENET</span>
-   
-        <span class="desc__stars">
-       <img  src="https://www.flaticon.com/svg/vstatic/svg/1828/1828884.svg?token=exp=1611861781~hmac=b095d56eca9d415a1f4ee0573a4959b5">
-        8
-        </span>
-        
+      <span v-if="feed.title != null" class="slide__content__title">{{feed.title}}</span>
+      <span v-if="feed.name != null" class="slide__content__name">{{feed.name}}</span>
+      <span class="desc__stars"  v-if="feed.vote_average != null">
+        <i class="fas fa-star"></i>{{feed.vote_average}}
+      </span>
+      <div v-if="feed.character != null" class="character_name">{{feed.character}}</div>
+      <div  class="character_name">{{feed.job}}</div>
     
     </div>
+    
     </div>
 </template>   
 
 <script>
 export default {
   name: 'Item',
+  props:['feed', 'type']
 
 }
 </script>
@@ -35,6 +40,16 @@ export default {
     width:300px;
     height: auto;
   }
+  .placeholder 
+  {
+    img 
+    {
+    border-radius: 10px;
+    width:300px;
+    height: 500px;
+    }
+  }
+
 }
 
 .slide__content
@@ -49,16 +64,20 @@ export default {
 {
   font-size: 2em;
   text-align: left;
-  padding:25px 0px 15px 0px;
+  padding:25px 0px 5px 10px;
+  max-width: 75%;
 }
 
 
 .desc__stars
 {
-  padding-right: 10px;
-  img 
+  padding-right: 15px;
+  
+  i 
   {
-    width:15px;
+    padding-right: 10px;
+     text-shadow: 0 0px 7px rgba(255, 217, 0, 0.35);
+    color:gold;
   }
 }
 </style>

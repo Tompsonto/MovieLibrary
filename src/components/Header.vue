@@ -1,10 +1,8 @@
 <template>
   <div class="header basePadding">
+     <router-link to="/"  >
     <div class="header__logo">MovieLib</div>
-    <div class="header__search">
-      <input placeholder="search">
-      <img src="https://www.flaticon.com/svg/vstatic/svg/56/56936.svg?token=exp=1611863139~hmac=9443d268abe7b5faf97bdd60ab821d92">
-    </div>
+     </router-link>
   </div>
 </template>
 

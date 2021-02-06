@@ -1,52 +1,113 @@
 <template>
-  <div class="heroSlider">
+  <Carousel class="heroSlider">
+    
+    <Slide class="heroSlide" v-for="(movie, i) in feed.slice(0, 8)" :key="i" v-bind:style="{ 'background-image': 'url(https://image.tmdb.org/t/p/w1280/'+ movie.backdrop_path + ')' }">
     <div class="heroOverlay"></div>
     <div class="heroContent contentPadding">
       <div class="heroStarsWrapper">
         
         <span class="heroStarsWrapper__start">
-          <img  src="https://www.flaticon.com/svg/vstatic/svg/1828/1828884.svg?token=exp=1611861781~hmac=b095d56eca9d415a1f4ee0573a4959b5">
-          5.6
+         <i class="fas fa-star"></i>
+          {{movie.vote_average}}
         </span>
          <span class="heroStarsWrapper__date">
-          2020
+          {{movie.release_date}}
         </span>
       </div>
-      <div class="heroContent__title">TENET</div>
+      <div class="heroContent__title">{{movie.title}}</div>
       <div class="heroMinDesc">
-        <div class="heroMinDesc__director">Director:<span style="color:yellow">John Doe</span></div>
-        <div class="heroMinDesc__scenario">Scenario:<span style="color:yellow">Jane Doe</span></div>
+        <div class="heroMinDesc__director">Director:<span style="color:gold; text-shadow: 0 5px 15px rgba(255, 217, 0, 0.35);">John Doe</span></div>
+        <div class="heroMinDesc__scenario">Scenario:<span style="color:gold; text-shadow: 0 5px 15px rgba(255, 217, 0, 0.35);">Jane Doe</span></div>
       </div>
-      <div class="heroContent__desc">Lorem ipsum dolor sit amet consectetur
-         adipisicing elit. Placeat accusamus odit voluptas mollitia dolore vel
-          harum, unde natus fugit, aliquam debitis inventore esse nobis modi!
-           Quis numquam facilis consequuntur esse?</div>
+      <div class="heroContent__desc">{{movie.overview}}</div>
+             <router-link v-bind:to="'/movie/'+movie.id"  types="movie">
            <button class="btn btn--main glow-btn">See more</button>
+             </router-link>
     </div>
-  </div>
+    </Slide>
+  </Carousel>
 </template>
 
 <script>
+//
+import { Carousel, Slide } from 'vue-carousel';
 export default {
   name: 'HeroSlider',
+    components:{
+       Carousel,
+       Slide
+  },
+  data(){
+    return{
+        feed:null,
+    }
+  },
+   mounted(){
+      this.axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key='+process.env.VUE_APP_API_KEY+'&language=en-US')
+      .then(response => {
+        this.feed = response.data.results;
+       
+      })
+   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style   lang="scss">
+.heroSlider
+{
+.VueCarousel-wrapper
+{
+  height:100vh;
+  .VueCarousel-inner
+{
+  flex-basis: 100vw!important;
+  height:100vh!important
+}
+}
+
+.VueCarousel-pagination
+{
+  position: absolute;
+  top:90vh;
+  .VueCarousel-dot
+  {
+    border-radius: 0px;
+    width:100px!important;
+    height:2px!important;
+    background:gray!important;
+    padding:0px!important;
+    margin:0px 15px;
+  }
+  .VueCarousel-dot--active
+  {
+    background:red!important
+  }
+}
+}
+
 .heroSlider
 {
   width:100vw;
   height:100vh;
-  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.wallpapersden.com%2Fimage%2Fdownload%2Ftenet-movie_68298_1920x1080.jpg&f=1&nofb=1');
-  background-size: cover;
+  min-height: 600px;
+ 
+ 
+}
+.heroSlide
+{
+  position: relative;
+  width: 100vw;
+   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
 .heroOverlay
 {
   position: absolute;
   z-index: 90;
   width:100vw;
+   min-height: 600px;
   height:100vh;
   top:0px;
   left:0px;
@@ -60,7 +121,7 @@ export default {
   align-items: flex-start;
   position: relative;
   z-index: 100;
-  top:35vh;
+  top:15rem;
   width: 40vw;
   color:white;
 
@@ -71,10 +132,14 @@ export default {
   font-size: 1.4em;
   padding-left: 5px;
   padding-bottom: 10px;
-  img 
+  i 
   {
     width:18px;
     height: auto;
+    text-shadow: 0 5px 15px rgba(255, 217, 0, 0.35);
+    color:gold;
+    
+
   }
 }
 .heroStarsWrapper__date
@@ -114,10 +179,11 @@ export default {
   width: 200px;
 }
 
-@media (max-width: 1300px) { 
+@media (max-width: 1366px) { 
   .heroContent
   {
     width:55vw;
+    top:180px;
   }
   
  }
