@@ -16,7 +16,7 @@
     </Carousel>
     <Carousel :perPage="4" :paginationEnabled="false"  :loop="true"   :navigationEnabled="false"    v-show="activeTab ==='crew'">
       <Slide v-for="(crew, i) in feed.crew" :key="i">
-          <router-link v-bind:to="'/movie/'+crew.id"  >
+          <router-link v-bind:to="'/person/'+crew.id"  >
           <Item  :feed="crew"/>
           </router-link>
       </Slide>

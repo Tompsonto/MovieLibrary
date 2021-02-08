@@ -21,7 +21,7 @@
               </span>
             </div>
           </div>
-          <div class="rate">
+          <div  v-if="feed.overview != null" class="rate">
         
             <span class="rateStar"> 
             <i class="fas fa-star"></i>
@@ -29,10 +29,13 @@
             </span>/ 10
           </div>
         </div>
-        <div class="fullDesc">
+        <div  v-if="feed.overview != null" class="fullDesc">
          {{feed.overview}}
         </div>
-        <button class="btn trailer-btn">Watch Trailer</button>
+         <div  v-else class="fullDesc">
+         {{feed.biography}}
+        </div>
+        <button  v-if="feed.overview != null" class="btn trailer-btn">Watch Trailer</button>
       </div>
     </div>
   </div>
@@ -87,7 +90,10 @@ export default {
 {
   width:100vw;
   height:100vh;
-  min-height: 750px;
+  min-height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .itemBackground
@@ -105,9 +111,9 @@ export default {
 {
   position: absolute;
   z-index: 90;
-  width:101vw;
+  width:100vw;
   min-height: 750px;
-  height:100vh;
+  height:102vh;
   top:0px;
   left:0px;
   background:rgba(0,0,0,.3)
@@ -117,13 +123,14 @@ export default {
 {
   
   position: absolute;
-  left:15vw;
-  right:15vw;
+
   top:20vh;
   z-index: 1000;
-  min-width: 1000px;
+
+  max-width: 1000px;
   min-height: 500px;
   display: flex;
+  justify-content: center;
   img 
   { 
     height:56vh;
@@ -190,4 +197,59 @@ export default {
   font-size:2em;
   width:260px;
 }
+@media (max-width: 1200px) {
+  .itemContentWrapper, .itemBackground, .itemBackground--overlay
+  {
+    min-height:125vh;
+  }
+  .itemContent
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width:75vw;
+    left:0px;
+    right:0px;
+    font-size: .8em;
+
+    img 
+    {
+      height: auto;
+      width: 300px;
+      min-height: 100px;
+    }
+    .itemContent__texts
+    {
+      padding-left: 15px;
+      padding-top: 15px;
+    }
+    .fullDesc
+    {
+      max-width:90%;
+    }
+  }
+ }
+ @media (max-width: 620px){
+     .itemContent 
+     {
+       min-height: 100vh;
+       img 
+       {
+         width:90%;
+       }
+     }
+      .itemContentWrapper, .itemBackground
+      {
+        position: relative;
+        height:145vh;
+        min-height: 140vh;
+      }
+      .itemBackground--overlay
+      {
+        height:145vh;
+          min-height: 140vh;
+      }
+ }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="item-wrapper">
       <ItemContent type="movie"/>
-      <ItemTeamSlider type="movie" class="TeamSlider"/>
-      <Slider  title="Related" types="related"/>
+     <!-- <ItemTeamSlider type="movie" class="TeamSlider"/>-->
+      <!--<Slider title="Related" types="related"/>-->
    
   </div>
 </template>
@@ -11,14 +11,14 @@
 
 
 import ItemContent from '../components/ItemComponents/ItemContent'
-import ItemTeamSlider from '../components/ItemComponents/ItemTeamSlider'
-import Slider from '../components/Slider'
+//import ItemTeamSlider from '../components/ItemComponents/ItemTeamSlider'
+//import Slider from '../components/Slider'
 export default {
   name: 'Movie',
   components: {
     ItemContent,
-    ItemTeamSlider,
-    Slider
+   // ItemTeamSlider,
+   // Slider
   }
 }
 </script>

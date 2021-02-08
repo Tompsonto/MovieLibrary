@@ -3,7 +3,7 @@
     <Header/>
     <div class="mainContent">
    
-        <router-view/>
+        <router-view :key="$route.fullPath"/>
    
     </div>
     <Footer/>
@@ -51,7 +51,7 @@ p{
   height:100vh;
 }
 
-button:active, button:focus
+button:active, button:focus, input:active, input:focus
 {
   outline:none;
 }

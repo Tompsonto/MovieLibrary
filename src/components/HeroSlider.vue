@@ -1,5 +1,5 @@
 <template>
-  <Carousel class="heroSlider">
+  <Carousel class="heroSlider"  :paginationEnabled="true" :autoplay="true" :loop="true">
     
     <Slide class="heroSlide" v-for="(movie, i) in feed.slice(0, 8)" :key="i" v-bind:style="{ 'background-image': 'url(https://image.tmdb.org/t/p/w1280/'+ movie.backdrop_path + ')' }">
     <div class="heroOverlay"></div>
@@ -15,11 +15,8 @@
         </span>
       </div>
       <div class="heroContent__title">{{movie.title}}</div>
-      <div class="heroMinDesc">
-        <div class="heroMinDesc__director">Director:<span style="color:gold; text-shadow: 0 5px 15px rgba(255, 217, 0, 0.35);">John Doe</span></div>
-        <div class="heroMinDesc__scenario">Scenario:<span style="color:gold; text-shadow: 0 5px 15px rgba(255, 217, 0, 0.35);">Jane Doe</span></div>
-      </div>
-      <div class="heroContent__desc">{{movie.overview}}</div>
+
+      <div class="heroContent__desc">{{movie.overview|truncate(80)}}</div>
              <router-link v-bind:to="'/movie/'+movie.id"  types="movie">
            <button class="btn btn--main glow-btn">See more</button>
              </router-link>
@@ -42,6 +39,14 @@ export default {
         feed:null,
     }
   },
+     filters: {
+            truncate: function(value) {
+                if (value.length > 20) {
+                    value = value.substring(0, 200) + '...';
+                }
+                return value
+            }
+        },
    mounted(){
       this.axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key='+process.env.VUE_APP_API_KEY+'&language=en-US')
       .then(response => {
@@ -98,6 +103,9 @@ export default {
 {
   position: relative;
   width: 100vw;
+  
+  display: flex;
+  align-items: center;
    background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -121,7 +129,7 @@ export default {
   align-items: flex-start;
   position: relative;
   z-index: 100;
-  top:15rem;
+ 
   width: 40vw;
   color:white;
 
@@ -183,25 +191,59 @@ export default {
   .heroContent
   {
     width:55vw;
-    top:180px;
+    width:85vw
+  }
+  .heroContent__desc 
+  {
+    width:60%;
   }
   
  }
+ @media (max-width: 990px) {
+   .heroContent{
+     font-size: .9em;
+   }
+  }
 
  @media (max-width:890px) { 
     .heroContent
     {
-      top:30vh;
-       font-size: 1em;
+
+      font-size: .9em;
+      width:95vw;
     }
+   
  }
 
   @media (max-width:690px) { 
     .heroContent
     {
-      top:35vh;
+      top:10vh;
       width: 95vw;
-      font-size: .7em;
+      font-size: .9em;
     }
+    .heroContent__desc 
+    {
+    width:90%;
+    }
+  
+    .VueCarousel-pagination
+{
+  position: absolute;
+  top:87vh;
+  .VueCarousel-dot
+  {
+    border-radius: 0px;
+    width:30px!important;
+    height:2px!important;
+    background:gray!important;
+    padding:0px!important;
+    margin:0px 15px;
+  }
+  .VueCarousel-dot--active
+  {
+    background:red!important
+  }
+}
  }
 </style>
