@@ -34,14 +34,7 @@ p{
   padding:0px;
 }
 
-.basePadding
-{
-  padding:0px 45px;
-}
-.contentPadding
-{
-  padding:0px 100px;
-}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -63,24 +56,5 @@ button:active, button:focus, input:active, input:focus
    box-shadow: 0 5px 15px rgba(181, 3, 3, .4);
 }
 
-@media (max-width: 1366px) { 
-      .basePadding
-    {
-       padding:0px 20px;
-    }
-    .contentPadding 
-    {
-      padding:0px 20px;
-    }
-}
- @media (max-width:890px) { 
-    .basePadding
-    {
-       padding:0px 15px;
-    }
-    .contentPadding 
-    {
-      padding:0px 10px;
-    }
- }
+
 </style>

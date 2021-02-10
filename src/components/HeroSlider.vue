@@ -84,8 +84,8 @@ export default {
   .VueCarousel-dot
   {
     border-radius: 0px;
-    width:100px!important;
-    height:2px!important;
+    width:50px!important;
+    height:5px!important;
     background:gray!important;
     padding:0px!important;
     margin:0px 15px;
@@ -102,14 +102,11 @@ export default {
   width:100vw;
   height:100vh;
   min-height: 600px;
- 
- 
 }
 .heroSlide
 {
   position: relative;
   width: 100vw;
-  
   display: flex;
   align-items: center;
    background-size: cover;
@@ -135,8 +132,8 @@ export default {
   align-items: flex-start;
   position: relative;
   z-index: 100;
- 
-  width: 40vw;
+  padding:0px 10px;
+  width: 85vw;
   color:white;
 
 }
@@ -146,13 +143,17 @@ export default {
   font-size: 1.4em;
   padding-left: 5px;
   padding-bottom: 10px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+
   i 
   {
     width:18px;
     height: auto;
     text-shadow: 0 5px 15px rgba(255, 217, 0, 0.35);
     color:gold;
-    
+   
 
   }
 }
@@ -162,7 +163,7 @@ export default {
 }
 .heroContent__title
 {
-  font-size: 5em;
+  font-size: 4em;
   text-align: left;
 }
 
@@ -179,7 +180,7 @@ export default {
 .heroContent__desc
 {
   
-  font-size: 1.4em;
+  font-size: 1.3em;
   text-align: left;
   padding:20px 0px 0px 5px;
 }
@@ -189,58 +190,36 @@ export default {
   background:rgb(181, 3, 3);
   color:white;
   margin:25px 0px 0px 5px;
-  font-size: 2em;
-  width: 200px;
+  font-size: 1.5em;
+  width: 160px;
 }
 
-@media (max-width: 1366px) { 
+
+@media (min-width: 780px) {
+  .heroContent__desc{
+    width:75%;
+  }
+
+}
+
+@media (min-width: 1000px) {
   .heroContent
   {
-    width:55vw;
-    width:85vw
+    width:50vw;
+    font-size: 1.2em;
+    padding:0px 25px;
   }
-  .heroContent__desc 
-  {
-    width:60%;
+  .heroContent__desc{
+    width:75%;
   }
-  
- }
- @media (max-width: 990px) {
-   .heroContent{
-     font-size: .9em;
-   }
-  }
-
- @media (max-width:890px) { 
-    .heroContent
-    {
-
-      font-size: .9em;
-      width:95vw;
-    }
-   
- }
-
-  @media (max-width:690px) { 
-    .heroContent
-    {
-      top:10vh;
-      width: 95vw;
-      font-size: .9em;
-    }
-    .heroContent__desc 
-    {
-    width:90%;
-    }
-  
-    .VueCarousel-pagination
+.VueCarousel-pagination
 {
   position: absolute;
-  top:87vh;
+  top:90vh;
   .VueCarousel-dot
   {
     border-radius: 0px;
-    width:30px!important;
+    width:100px!important;
     height:2px!important;
     background:gray!important;
     padding:0px!important;
@@ -251,5 +230,11 @@ export default {
     background:red!important
   }
 }
- }
+.btn--main
+{
+  width:200px;
+}
+}
+
+
 </style>

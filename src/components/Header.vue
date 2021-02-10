@@ -1,9 +1,9 @@
 <template>
-  <div class="header basePadding">
+  <div class="header">
      <router-link to="/"  >
     <div class="header__logo">MovieLib</div>
      </router-link>
-     <div class="header__search basePadding">
+     <div class="header__search ">
        <input type="text" placeholder="search..." v-model="searchInput"  @keyup.enter="search">
        <button><i class="fas fa-search"></i></button>
        <div class="search__results__wrapper">
@@ -56,105 +56,50 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-ul, li 
-{
-  list-style: none;
-  padding:0px;
-  margin:0px;
-  position:relative;
-}
 .header
 {
-  z-index: 100;
   position: absolute;
-  top:0px;
-  left:0px;
-  width:100vw;
-  height:100px;
-  display: flex;
+  z-index: 150;
+  width:99vw;
+  display:flex;
   justify-content: space-between;
-  padding-top:25px;
-}
-.header__logo
-{
-  font-size: 3em;
-}
-  button 
+  padding:15px 10px;
+  font-size: 1.7em;
+  .header__search
   {
-    border:none;
-    background:none;
-    display:none;
-    i 
+    position: relative;
+    input 
     {
-      color:white;
-      font-size: 2em;
-    }
-  }
-.header__search
-{
-  input 
-  {
-    border:none;
+     border:none;
     background:none;
-    font-size: 1.5em;
-    color:white;
-    border-bottom:solid 1px white;
-     &::placeholder
-  {
-    color:white;
-  }
-  &:active, &:focus 
-  {
-    caret-color: white;
-  }
+    border-bottom:1px solid white;
+    display:none;
+    }
+    button 
+    {
+      background:none;
+      border:none;
+      color:white;
+      font-size: 1em;
+    }
   
   }
- .search__results__wrapper
- {
-   display:none;
-   width:300px;
-   position: relative;
-   z-index:120;
-   height:auto;
-   padding:5px 10px;
-   max-height:75vh;
-  background:rgba(0,0,0,.8);
-  overflow:auto;
-    li 
+}
+@media (min-width: 1000px){
+  .header 
+  {
+    padding:25px;
+    font-size: 2em;
+    .header__search
     {
-      position: relative;
-      border-bottom: 1px solid gray;
-      padding:5px;
-      &:hover{
-        background:gray;
-        cursor: pointer;
+      display: flex;
+      align-items: baseline;
+      input 
+      {
+        display: block;
+        width:200px;
       }
     }
- }
-
-}
-@media (max-width: 1100px) {
-  input
-  {
-    display:none;
   }
-    button 
-  {
-    border:none;
-    background:none;
-    display:block;
-    i 
-    {
-      color:white;
-      font-size: 2em;
-    }
-  }
-
 }
- @media (max-width:890px) { 
-    .header__logo
-    {
-     font-size: 1.7em;
-    }
- }
 </style>

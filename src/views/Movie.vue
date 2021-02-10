@@ -1,8 +1,8 @@
 <template>
   <div class="item-wrapper">
       <ItemContent  class="content" type="movie"/>
-      <ItemTeamSlider type="movie" class="TeamSlider"/>
-      <Slider title="Related" types="related"/>
+     <ItemTeamSlider type="movie" class="TeamSlider" />
+     <Slider class="slider" title="Related" types="related"/>
   
   </div>
 </template>
@@ -28,11 +28,10 @@ export default {
 {
   position: relative;
 }
-.TeamSlider
+.TeamSlider,.slider
 {
-  position:relative;
-  top:25px;
+  position: relative;
+  z-index: 101;
 }
-
 
 </style>

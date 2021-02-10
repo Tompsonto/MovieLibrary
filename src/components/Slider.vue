@@ -102,6 +102,16 @@ export default {
         this.series = response.data.results;
       })
     }
+    else if (this.type === 'credits'){
+        this.axios.get('https://api.themoviedb.org/3/person/'+this.page+'/tv_credits?api_key='+process.env.VUE_APP_API_KEY+'&language=en-US&page=1')
+          .then(response => {
+        this.movies = response.data.results;
+      })
+       this.axios.get('https://api.themoviedb.org/3/person/'+this.page+'/movie_credits?api_key='+process.env.VUE_APP_API_KEY)
+        .then(response => {
+        this.series = response.data.results;
+      })
+    }
     else{
       this.axios.get('https://api.themoviedb.org/3/movie/'+this.types+'?api_key='+process.env.VUE_APP_API_KEY+'&language=en-US&page=1')
         .then(response => {

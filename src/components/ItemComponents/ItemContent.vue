@@ -75,13 +75,6 @@ export default {
           this.feed = response.data;
           })
        }
-      
-      
-
-
-     
-
-
   },
 
      
@@ -92,9 +85,10 @@ export default {
 <style scoped lang="scss">
 .itemContentWrapper
 {
+  position: relative;
   width:100vw;
-  height:100vh;
-  min-height: 800px;
+  min-height: 100vh;
+  height:auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,22 +96,21 @@ export default {
 
 .itemBackground
 {
+ 
+  top:0px;
   width:100vw;
-  height:99vh;
-  min-height: 750px;
-  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.wallpapersden.com%2Fimage%2Fdownload%2Ftenet-movie_68298_1920x1080.jpg&f=1&nofb=1');
-  background-size: cover;
+  height: 100vh;
   background-position: center;
   filter: blur(10px);
-  position: sticky;
+  position: fixed;
 }
 .itemBackground--overlay
 {
-  position: absolute;
+  position: fixed;
   z-index: 90;
   width:100vw;
-  min-height: 750px;
-  height:102vh;
+  
+  height:100vh;
   top:0px;
   left:0px;
   background:rgba(0,0,0,.3)
@@ -125,20 +118,18 @@ export default {
 
 .itemContent
 {
-  
-  position: absolute;
+  position: relative;
+  top:100px;
+  z-index: 100;
 
-  top:20vh;
-  z-index: 1000;
-
-  max-width: 1000px;
-  min-height: 500px;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   img 
   { 
-    height:56vh;
-    min-height:500px;
+    height:auto;
+    width: 60vw;
     border-radius: 10px;
     box-shadow: 2px 2px 19px 2px rgba(0,0,0,0.56);
   } 
@@ -146,25 +137,27 @@ export default {
 
 .itemContent__texts
 {
-  padding-left: 45px; 
+  padding: 0px 15px; 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   .textsTitle
   {
-    font-size: 3.3em;
+    font-size: 2.6em;
     color:white;
     font-weight: bold;
+    padding:5px 10px;
   }
   .textsDate
   {
     font-size: 1.7em;
     font-weight: 200;
+    padding:0px 10px;
   }
   .textsDetails
   {
     display: flex;
-    padding-top:10px;
+    padding:10px 10px;
+   
     .detailsCategory
     {
       font-weight: bold;
@@ -172,7 +165,7 @@ export default {
   }
   .rate
   {
-    padding-top:15px;
+    padding-top:5px;
     .rateStar
     {
       font-size: 2.2em;
@@ -185,77 +178,57 @@ export default {
   .fullDesc
   {
     position: relative;
-    padding-top:3vh;
-    max-width: 70%;
+    padding:5px;
+    max-height: 70vh;
     font-size: 1.1em;
     text-align: justify;
     line-height: 1.45em;
+    
   }
 }
 
 .trailer-btn
 {
-  margin-top:5vh;
+  margin-top:10px;
   background:rgb(181, 3, 3);
   color:white;
-  font-size:2em;
-  width:260px;
+  font-size:1em;
+  width:180px;
 }
-@media (max-width: 1200px) {
-  .itemContentWrapper, .itemBackground, .itemBackground--overlay
-  {
-    min-height:125vh;
-  }
-  .itemContent
-  {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    width:75vw;
-    left:0px;
-    right:0px;
-    font-size: .8em;
 
-    img 
+@media (min-width: 780px) {
+  .itemContent{
+    padding:0px 15px;
+    img
     {
-      height: auto;
-      width: 300px;
-      min-height: 100px;
+      width:50vw;
     }
     .itemContent__texts
+      {
+        padding-top: 10px;
+        
+      }
+  }
+}
+
+@media (min-width: 1000px){
+  .itemContent{
+    flex-direction: row;
+    width:85vw;
+    align-items: flex-start;
+    img
     {
-      padding-left: 15px;
-      padding-top: 15px;
+      width: 30vw;
+      max-width: 450px;
     }
     .fullDesc
     {
-      max-width:90%;
+      max-width: 45vw;
+      overflow-y: auto;
     }
+
   }
- }
- @media (max-width: 620px){
-     .itemContent 
-     {
-       min-height: 100vh;
-       img 
-       {
-         width:90%;
-       }
-     }
-      .itemContentWrapper, .itemBackground
-      {
-        position: relative;
-        height:145vh;
-        min-height: 140vh;
-      }
-      .itemBackground--overlay
-      {
-        height:145vh;
-          min-height: 140vh;
-      }
- }
+}
 
 
 </style>
