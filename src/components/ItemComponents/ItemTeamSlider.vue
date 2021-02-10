@@ -1,5 +1,5 @@
 <template>
-  <div class="sliderWrapper contentPadding" :key="this.$route.params.id">
+  <div class="sliderWrapper sliderPadding" :key="this.$route.params.id">
     <div class="sliderWrapper__header">
       <div class="header__title">{{title}}</div>
       <div class="header__tabsWrapper">
@@ -65,6 +65,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.sliderPadding{
+  padding-left:15px;
+  padding-right:15px;
+}
 .sliderWrapper
 {
   padding-top: 100px;

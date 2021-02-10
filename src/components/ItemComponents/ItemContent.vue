@@ -42,6 +42,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'ItemContent',
  props: ['type'],
@@ -75,12 +76,15 @@ export default {
           })
        }
       
-     
+      
+
 
      
 
 
   },
+
+     
 }
 </script>
 
@@ -252,4 +256,6 @@ export default {
           min-height: 140vh;
       }
  }
+
+
 </style>

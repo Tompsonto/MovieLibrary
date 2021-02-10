@@ -7,14 +7,14 @@
         <span class="header__tabsWrapper_tab--2"><a v-on:click="activeTab='series'" v-bind:class="[ activeTab === 'series' ? 'active' : '' ]">Series</a></span>
       </div>
     </div>
-    <Carousel :perPage="carouselItems" :paginationEnabled="false"  :navigationEnabled="false"  :loop="true"  v-show="activeTab ==='movies'">
+    <Carousel :perPage="itemsPerCarousel" :paginationEnabled="false"  :navigationEnabled="false"  :loop="true"  v-show="activeTab ==='movies'">
       <Slide v-for="(movie, i) in movies" :key="i">
         <router-link v-bind:to="'/movie/'+movie.id"  >
           <Item :feed="movie"/>
         </router-link>
       </Slide>
     </Carousel >
-       <Carousel :perPage="carouselItems" :paginationEnabled="false"  :loop="true"   :navigationEnabled="false"    v-show="activeTab ==='series'">
+       <Carousel :perPage="itemsPerCarousel" :paginationEnabled="false"  :loop="true"   :navigationEnabled="false"    v-show="activeTab ==='series'">
       <Slide v-for="(serie, i) in series" :key="i">
           <router-link v-bind:to="'/series/'+serie.id"  >
           <Item :feed="serie"/>
@@ -44,38 +44,54 @@ export default {
       series:null,
       page:this.$route.params.id,
       activeTab: 'movies',
-      window:{
-			width:0,
-			height:0
+      window: {
+			width: 0,
+			height: 0
       },
     }
   },
-  
+
+  created(){
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+  },
+
   methods: {
 		handleResize() {
 			this.window.width = window.innerWidth;
 			this.window.height = window.innerHeight;
     },
+  },
 
-  computed:{
-    itemsPerCarousel(){
-    var carouselItems = null
-      if (this.window.width < 800){
-        carouselItems = 2
+    computed:{
+       itemsPerCarousel(){
+         var lele = null
+      if (this.window.width < 600)
+      {
+        lele = 2
       }
-  
-      else{
-        carouselItems = 5
+      else if (this.window.width < 800)
+      {
+        lele = 3
       }
-      return carouselItems
+      else if (this.window.width < 1100)
+      {
+        lele = 4
+      }
+      else
+      {
+        lele = 5
+      }
+    
+      return lele
     }
   },
-    
-   
-  },
+
+   destroyed() {
+		window.removeEventListener("resize", this.handleResize);
+	},
   mounted(){
-    window.addEventListener("resize", this.handleResize);
-    this.handleResize();
+ 
     if (this.types === 'related'){
          this.axios.get('https://api.themoviedb.org/3/movie/'+this.page+'/similar?api_key='+process.env.VUE_APP_API_KEY+'&language=en-US&page=1')
         .then(response => {
@@ -98,9 +114,7 @@ export default {
     }
 
 },
-  destroyed() {
-		window.removeEventListener("resize", this.handleResize);
-	},
+
 }
 </script>
 
@@ -147,7 +161,8 @@ a{
 }
   a.active {
    
-    color: #484848;
+    color:rgb(181, 3, 3);
+    text-shadow: 0 0px 7px rgba(181,3, 30, 0.35);
     border-bottom: 2px solid rgb(181, 3, 3);
     cursor: pointer;
 }

@@ -1,5 +1,6 @@
 <template>
-  <Carousel class="heroSlider"  :paginationEnabled="true" :autoplay="true" :loop="true">
+
+  <Carousel  class="heroSlider"  :paginationEnabled="true" :autoplay="true" :loop="true">
     
     <Slide class="heroSlide" v-for="(movie, i) in feed.slice(0, 8)" :key="i" v-bind:style="{ 'background-image': 'url(https://image.tmdb.org/t/p/w1280/'+ movie.backdrop_path + ')' }">
     <div class="heroOverlay"></div>
@@ -23,6 +24,7 @@
     </div>
     </Slide>
   </Carousel>
+
 </template>
 
 <script>
@@ -32,7 +34,7 @@ export default {
   name: 'HeroSlider',
     components:{
        Carousel,
-       Slide
+       Slide,
   },
   data(){
     return{
@@ -59,6 +61,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style   lang="scss">
+.heroWrapper
+{
+  height:100vh;
+}
 .heroSlider
 {
 .VueCarousel-wrapper

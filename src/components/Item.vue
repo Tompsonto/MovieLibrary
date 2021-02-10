@@ -1,20 +1,34 @@
 <template>
+
+
+
  <div class="slide">
       <img  v-if="feed.poster_path != null" :src="'https://image.tmdb.org/t/p/w1280/'+ feed.poster_path">
       <img  v-else-if="feed.profile_path != null" :src="'https://image.tmdb.org/t/p/w1280/'+ feed.profile_path">
       <img  v-else class="placeholder" src="../assets/placeholder.png">
 
-    <div class="slide__content">
-      <span v-if="feed.title != null" class="slide__content__title">{{feed.title}}</span>
+    <div v-if="feed.title != null" class="slide__content movie">
+      <span class="slide__content__title">{{feed.title}}</span>
+      <span class="desc__stars"  v-if="feed.vote_average != null">
+        <i class="fas fa-star"></i>{{feed.vote_average}}
+      </span>
+    </div>
+
+    <div v-if="feed.name != null" class="slide__content series">
       <span v-if="feed.name != null" class="slide__content__name">{{feed.name}}</span>
       <span class="desc__stars"  v-if="feed.vote_average != null">
         <i class="fas fa-star"></i>{{feed.vote_average}}
       </span>
-      <div v-if="feed.character != null" class="character_name">{{feed.character}}</div>
-      <div  class="character_name">{{feed.job}}</div>
-    
     </div>
-    
+
+
+    <div v-if="feed.credit_id != null || feed.cast_id != null" class="slide__content person">
+      <div  class="character_wrapper">
+       
+        <div  class="character_name">{{feed.character}}</div>
+        <div  class="character_name">{{feed.job}}</div>
+      </div>
+    </div>
     </div>
 </template>   
 
@@ -54,15 +68,16 @@ export default {
 
 .slide__content
 {
-  width:100%;
+  width:98%;
+  margin: auto;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
 }
 
-.slide__content__title
+.slide__content__title, .slide__content__name
 {
-  font-size: 2em;
+  font-size: 1.7em;
   text-align: left;
   padding:25px 0px 5px 10px;
   max-width: 75%;
@@ -71,7 +86,7 @@ export default {
 
 .desc__stars
 {
-  padding-right: 15px;
+  padding-left: 15px;
   
   i 
   {
@@ -79,5 +94,11 @@ export default {
      text-shadow: 0 0px 7px rgba(255, 217, 0, 0.35);
     color:gold;
   }
+}
+
+.character_wrapper
+{
+  display: flex;
+  flex-direction: column;
 }
 </style>

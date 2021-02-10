@@ -1,7 +1,7 @@
 <template>
   <div class="item-wrapper">
       <ItemContent type="series"/>
-      <ItemTeamSlider  types="popular" class="TeamSlider"/>
+      <ItemTeamSlider  types="popular" />
       <Slider/>
   </div>
 </template>
@@ -24,11 +24,5 @@ export default {
 
 <style lang="scss">
 
-.TeamSlider
-{
- position: relative;
-  top:-250px;
-  z-index: 101;
-}
 
 </style>
