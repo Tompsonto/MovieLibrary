@@ -1,6 +1,6 @@
 <template>
 
-  <Carousel  class="heroSlider"  :paginationEnabled="true" :autoplay="true" :loop="true">
+  <Carousel  class="heroSlider"  :paginationEnabled="true" :autoplay="false" :loop="true">
     
     <Slide class="heroSlide" v-for="(movie, i) in feed.slice(0, 8)" :key="i" v-bind:style="{ 'background-image': 'url(https://image.tmdb.org/t/p/w1280/'+ movie.backdrop_path + ')' }">
     <div class="heroOverlay"></div>
@@ -64,6 +64,7 @@ export default {
 .heroWrapper
 {
   height:100vh;
+  width: 100vw;
 }
 .heroSlider
 {
@@ -97,12 +98,7 @@ export default {
 }
 }
 
-.heroSlider
-{
-  width:100vw;
-  height:100vh;
-  min-height: 600px;
-}
+
 .heroSlide
 {
   position: relative;
@@ -120,8 +116,8 @@ export default {
   width:100vw;
    min-height: 600px;
   height:100vh;
-  top:0px;
-  left:0px;
+  
+
   background:rgba(0,0,0,.8)
 }
 .heroContent

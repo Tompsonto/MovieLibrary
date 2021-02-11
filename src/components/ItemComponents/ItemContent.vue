@@ -120,7 +120,7 @@ export default {
 {
   position: relative;
   top:100px;
-  z-index: 100;
+  z-index: 99;
 
   min-height: 100vh;
   display: flex;

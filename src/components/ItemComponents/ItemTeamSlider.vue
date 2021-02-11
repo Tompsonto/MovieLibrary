@@ -8,17 +8,21 @@
       </div>
     </div>
       <Carousel :perPage="4" :paginationEnabled="false"  :loop="true"   :navigationEnabled="false"    v-show="activeTab ==='cast'">
-      <Slide  v-for="(cast, i) in feed.cast" :key="i">
-          <router-link v-bind:to="'/person/'+cast.id"  >
+      <Slide  v-for="(cast, i) in feed.cast" :key="i"
+       :data-index="cast.id"
+      @slideclick="handleSlideClickPerson">
+      
           <Item :feed="cast"/>
-          </router-link>
+     
       </Slide>
     </Carousel>
     <Carousel :perPage="4" :paginationEnabled="false"  :loop="true"   :navigationEnabled="false"    v-show="activeTab ==='crew'">
-      <Slide v-for="(crew, i) in feed.crew" :key="i">
-          <router-link v-bind:to="'/person/'+crew.id"  >
+      <Slide v-for="(crew, i) in feed.crew" :key="i"
+          
+          :data-index="crew.id"
+          @slideclick="handleSlideClickPerson" >
           <Item  :feed="crew"/>
-          </router-link>
+          
       </Slide>
     </Carousel>
 
@@ -57,9 +61,13 @@ export default {
         this.feed = response.data;
         })
       }
-      
-   
   },
+  methods:{
+      handleSlideClickPerson (dataset)  {
+      this.$router.push(({ path: `/person/${dataset.index}` }))
+    },
+
+  }
 }
 </script>
 

@@ -31,7 +31,7 @@ export default {
 .TeamSlider,.slider
 {
   position: relative;
-  z-index: 101;
+  z-index:99;
 }
 
 </style>

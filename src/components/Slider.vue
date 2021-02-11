@@ -7,19 +7,23 @@
         <span class="header__tabsWrapper_tab--2"><a v-on:click="activeTab='series'" v-bind:class="[ activeTab === 'series' ? 'active' : '' ]">Series</a></span>
       </div>
     </div>
-    <Carousel :perPage="itemsPerCarousel" :paginationEnabled="false"  :navigationEnabled="false"  :loop="true"  v-show="activeTab ==='movies'">
-      <Slide v-for="(movie, i) in movies" :key="i">
-        <router-link v-bind:to="'/movie/'+movie.id"  >
+    <Carousel :perPage="itemsPerCarousel" :paginationEnabled="false" :navigate-to="4" :navigationEnabled="false"  :loop="true"  v-show="activeTab ==='movies'">
+      <Slide v-for="(movie, i) in movies" :key="i"
+      :data-index="movie.id"
+      @slideclick="handleSlideClickMovie">
+     
           <Item :feed="movie"/>
-        </router-link>
+   
       </Slide>
     </Carousel >
-       <Carousel :perPage="itemsPerCarousel" :paginationEnabled="false"  :loop="true"   :navigationEnabled="false"    v-show="activeTab ==='series'">
-      <Slide v-for="(serie, i) in series" :key="i">
-          <router-link v-bind:to="'/series/'+serie.id"  >
+       <Carousel :perPage="itemsPerCarousel" :paginationEnabled="false"  :loop="true"  :navigate-to="4"   :navigationEnabled="false"    v-show="activeTab ==='series'">
+      <Slide v-for="(serie, i) in series" :key="i"  
+       :data-index="serie.id"
+        @slideclick="handleSlideClickSeries">
+       
           <Item :feed="serie"/>
          
-          </router-link>
+
       </Slide>
         
     </Carousel>
@@ -54,45 +58,7 @@ export default {
   created(){
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
-  },
-
-  methods: {
-		handleResize() {
-			this.window.width = window.innerWidth;
-			this.window.height = window.innerHeight;
-    },
-  },
-
-    computed:{
-       itemsPerCarousel(){
-         var lele = null
-      if (this.window.width < 600)
-      {
-        lele = 2
-      }
-      else if (this.window.width < 800)
-      {
-        lele = 3
-      }
-      else if (this.window.width < 1100)
-      {
-        lele = 4
-      }
-      else
-      {
-        lele = 5
-      }
-    
-      return lele
-    }
-  },
-
-   destroyed() {
-		window.removeEventListener("resize", this.handleResize);
-	},
-  mounted(){
- 
-    if (this.types === 'related'){
+        if (this.types === 'related'){
          this.axios.get('https://api.themoviedb.org/3/movie/'+this.page+'/similar?api_key='+process.env.VUE_APP_API_KEY+'&language=en-US&page=1')
         .then(response => {
         this.movies = response.data.results;
@@ -122,8 +88,49 @@ export default {
         this.series = response.data.results;
       })
     }
+    if (this.types === 'upcoming'){
+        this.axios.get('https://api.themoviedb.org/3/tv/airing_today?api_key='+process.env.VUE_APP_API_KEY+'&language=en-US&page=1')
+        .then(response => {
+        this.series = response.data.results;
+      })
+    }
+  },
 
-},
+  methods: {
+		handleResize() {
+			this.window.width = window.innerWidth;
+			this.window.height = window.innerHeight;
+    },
+      handleSlideClickSeries (dataset)  {
+      this.$router.push(({ path: `/series/${dataset.index}` }))
+    },
+      handleSlideClickMovie (dataset)  {
+      this.$router.push(({ path: `/movie/${dataset.index}` }))
+    }
+  },
+
+    computed:{
+       itemsPerCarousel(){
+         var items = null
+      if (this.window.width < 600){
+       items = 2
+      }
+      else if (this.window.width < 800){
+        items = 3
+      }
+      else if (this.window.width < 1000){
+        items = 4
+      }
+      else{
+        items = 5
+      }
+      return items
+    }
+  },
+
+   destroyed() {
+		window.removeEventListener("resize", this.handleResize);
+	},
 
 }
 </script>
@@ -133,13 +140,12 @@ export default {
 .sliderWrapper
 {
   .VueCarousel-slide
-{
-  flex-shrink:1!important;
+  {
   padding-left: 10px;
+  }
 }
-}
-
 </style>
+
 <style scoped lang="scss">
 
 .sliderPadding{

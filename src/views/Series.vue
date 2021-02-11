@@ -1,8 +1,8 @@
 <template>
   <div class="item-wrapper">
-      <ItemContent type="series"/>
-      <ItemTeamSlider  types="popular" />
-      <Slider/>
+      <ItemContent  class="content" type="series"/>
+      <ItemTeamSlider class="TeamSlider"  types="popular" />
+      <Slider class="slider" title="Related" types="related"/>
   </div>
 </template>
 
@@ -23,6 +23,14 @@ export default {
 </script>
 
 <style lang="scss">
-
+.content
+{
+  position: relative;
+}
+.TeamSlider,.slider
+{
+  position: relative;
+  z-index: 101;
+}
 
 </style>

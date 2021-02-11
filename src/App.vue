@@ -41,7 +41,11 @@ p{
   -moz-osx-font-smoothing: grayscale;
   color:white;
   background: black;
-  height:100vh;
+  
+}
+.mainContent
+{
+  max-width: 100vw;
 }
 
 button:active, button:focus, input:active, input:focus

@@ -1,7 +1,4 @@
 <template>
-
-
-
  <div class="slide">
       <img  v-if="feed.poster_path != null" :src="'https://image.tmdb.org/t/p/w1280/'+ feed.poster_path">
       <img  v-else-if="feed.profile_path != null" :src="'https://image.tmdb.org/t/p/w1280/'+ feed.profile_path">
@@ -24,12 +21,13 @@
 
     <div v-if="feed.credit_id != null || feed.cast_id != null" class="slide__content person">
       <div  class="character_wrapper">
-       
+
         <div  class="character_name">{{feed.character}}</div>
         <div  class="character_name">{{feed.job}}</div>
+
       </div>
     </div>
-    </div>
+  </div>
 </template>   
 
 <script>
@@ -42,9 +40,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
-
-
 .slide
 {
   width:200px;
@@ -63,7 +58,10 @@ export default {
     height: 400px;
     }
   }
-
+ &:hover 
+ {
+   cursor: pointer;
+ }
 }
 
 .slide__content
@@ -102,14 +100,14 @@ export default {
   flex-direction: column;
 }
 
-@media (min-width: 800px){
+@media (min-width: 900px){
   .slide
   {
-    width:300px;
+    width:200px;
     img 
   {
     border-radius: 10px;
-    width:300px;
+    width:200px;
     height: auto;
   }
   .placeholder 
@@ -117,7 +115,35 @@ export default {
     img 
     {
     border-radius: 10px;
-    width:300px;
+    width:200px;
+    height: 500px;
+    }
+  }
+  }
+  .slide__content__title, .slide__content__name
+{
+  font-size: 1.5em;
+  text-align: left;
+  padding:15px 0px 0px 5px;
+  max-width: 70%;
+}
+}
+@media (min-width: 1000px){
+  .slide
+  {
+    width:250px;
+    img 
+  {
+    border-radius: 10px;
+    width:270px;
+    height: auto;
+  }
+  .placeholder 
+  {
+    img 
+    {
+    border-radius: 10px;
+    width:250px;
     height: 500px;
     }
   }
