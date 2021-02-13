@@ -24,11 +24,6 @@ export default {
 
 <style lang="scss">
 
-.TeamSlider
-{
- position: relative;
-  top:-250px;
-  z-index: 101;
-}
+
 
 </style>

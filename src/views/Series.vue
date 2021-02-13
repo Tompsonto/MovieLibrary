@@ -23,14 +23,6 @@ export default {
 </script>
 
 <style lang="scss">
-.content
-{
-  position: relative;
-}
-.TeamSlider,.slider
-{
-  position: relative;
-  z-index: 101;
-}
+
 
 </style>

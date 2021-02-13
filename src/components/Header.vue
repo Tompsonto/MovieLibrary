@@ -15,13 +15,13 @@
      <a v-on:click="searchToggle = !searchToggle"> <i :class="{ 'fas fa-times': searchToggle, 'fas fa-search':!searchToggle  }"></i></a>
      
       </div>
-      <ul>
+      <ul :class="{ 'list-active': feed }">
         <li v-for="(items, i) in feed" :key="i">
          <div  v-if="items.media_type == 'movie'" class="search-item" v-on:click="searchToggle = !searchToggle">
           <router-link v-bind:to="'/movie/'+items.id"  >
             <img v-if="items.poster_path !=null"  class="search-img"  :src="'https://image.tmdb.org/t/p/w1280/'+ items.poster_path"/> 
              <img  v-else class="placeholder" src="../assets/placeholder.png">
-             {{items.title}}
+             <p>{{items.title}}</p>
           </router-link>
         </div>
 
@@ -29,7 +29,7 @@
           <router-link v-bind:to="'/series/'+items.id"  >
             <img v-if="items.poster_path !=null"  class="search-img"  :src="'https://image.tmdb.org/t/p/w1280/'+ items.poster_path"/> 
            <img  v-else class="placeholder" src="../assets/placeholder.png">
-             {{items.name}}
+             <p>{{items.name}}</p>
           </router-link>
         </div>
 
@@ -37,7 +37,7 @@
           <router-link v-bind:to="'/person/'+items.id"  >
             <img v-if="items.profile_path !=null"  class="search-img"  :src="'https://image.tmdb.org/t/p/w1280/'+ items.profile_path"/> 
            <img  v-else class="placeholder" src="../assets/placeholder.png">
-             {{items.name}}
+            <p> {{items.name}}</p>
           </router-link>
         </div>
         </li>
@@ -53,8 +53,8 @@
 
 export default {
   name: 'Header',
-   data(){
-    return{
+  data(){
+  return{
       searchInput:null,
       searchToggle: false,
       feed:null,  
@@ -82,141 +82,117 @@ export default {
       
     }
   },
-
-
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-
-ul,li
+<style lang="scss" scoped>
+.overlay-active 
 {
-  list-style: none;
-  padding:0px;
-  margin: 0px;
+  position: fixed;
+  top:0px;
+  left: 0px;
+  width:100vw;
+  max-width: 100%;
+  height: 100vh;
+  background:rgba(0,0,0,.9);
+  z-index: 100;
 }
-  .nav-wrapper
-  {
-    z-index: 100;
-    position: absolute;
-    top:0px;
-    left:0px;
-    display:flex;
-    justify-content: space-between;
-    width:99vw;
-    padding:15px 10px;
-    font-size: 1.5em;
-  }
-
-  .overlay
+.nav-wrapper 
+{
+  font-size: 1.6em;
+  position: absolute;
+  z-index: 90;
+  width:100vw;
+  max-width: 100%;
+  display:flex;
+  justify-content: space-between;
+  padding:10px 15px;
+  z-index: 100;
+  input 
   {
     display:none
   }
-
-  .overlay-active
+  i 
   {
-    display: block;
-    position: fixed;
-    left:0px;
-    top:0px;
-    z-index: 200;
-    background: rgba(0,0,0,.95);
-    width:100vw;
-    height:100vh;
-    overflow: hidden;
+    padding:0px;
+    margin:0px;
   }
-
-.search-wrapper
-{
-  input 
+  ul
   {
+    list-style: none;
     display: none;
+ 
   }
-}
-
-.search-wrapper
-{
- ul 
- {
-   display: none;
- }
+  .list-active 
+  {
+    max-height: 100vh;
+    display:block;
+    position: absolute;
+    left:0px;
+    padding:15px;
+       overflow: auto;
+    li 
+    {
+      .search-item 
+      {
+        a
+        {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        p
+        {
+          text-align: left;
+          width: 100%;
+          padding-left: 10px;
+        }
+        }
+      }
+      img 
+      {
+        width:20%;
+        height: auto;
+      }
+    }
+  }
 }
 
 .search-wrapper-active
 {
-  position: fixed;
-  z-index: 201;
+  position: absolute;
+  z-index: 101;
   width:100vw;
-  margin: auto;
-  text-align: center;
-
-  ul 
-  {
-    margin-top:15px;
-   
-   display: block;
-    text-align: left;
-    position: absolute;
-    left: 15px;
-    max-height: 100vw;
-    width:85vw;
-    overflow-y: auto;
-    li 
-    {
-      padding-top: 15px;
-    }
-  }
+  max-width: 100%;
+  left:0px;
+  top:0px;
 }
 
-  .search-active
+.search-active 
+{
+  display: flex;
+  width:100vw;
+  max-width: 100%;
+  justify-content: center;  
+  padding-top: 15px;
+  input 
   {
-
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    .input-active
+    display: block;
+    border:none;
+    background:none;
+    border-bottom: solid 2px white;
+    padding:5px;
+    width:85%;
+    color:white;
+    &::placeholder
     {
-      left:0px;
-      display:block;
-      border:none;
-      background: none;
       color:white;
-      height: auto;
-      border-bottom: 2px solid white;
-      width: 85vw;
-      font-size: 1.1em;
-      padding-bottom: 10px;
-      caret-color: red;
-      &::placeholder
-      {
-        color:white;
-    
-      }
     }
- 
-  }
-    .search-item
+    &:active,&:active,&:focus
     {
-      position: relative;
-      width:80%;
-      padding-top:10px;
-      a
-      {
-        position: relative;
-        display: flex;
-        align-items: center;
-        font-size: .8em;
-        word-break: normal;
-        img, .placeholder
-        {
-          position: relative;
-          height:130px;
-          width: auto;
-          padding-right:10px;
-        }
-      }
+      outline: none;
+      caret-color: white;
     }
-  
+   
+}
+}
 </style>

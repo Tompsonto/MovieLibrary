@@ -1,5 +1,5 @@
 <template>
-  <div class="sliderWrapper sliderPadding">
+  <div class="sliderWrapper">
     <div class="sliderWrapper__header">
       <div class="header__title">{{title}}</div>
       <div class="header__tabsWrapper">
@@ -54,7 +54,6 @@ export default {
       },
     }
   },
-
   created(){
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
@@ -68,7 +67,7 @@ export default {
         this.series = response.data.results;
       })
     }
-    else if (this.type === 'credits'){
+    else if (this.types === 'credits'){
         this.axios.get('https://api.themoviedb.org/3/person/'+this.page+'/tv_credits?api_key='+process.env.VUE_APP_API_KEY+'&language=en-US&page=1')
           .then(response => {
         this.movies = response.data.results;
@@ -95,7 +94,6 @@ export default {
       })
     }
   },
-
   methods: {
 		handleResize() {
 			this.window.width = window.innerWidth;
@@ -108,14 +106,13 @@ export default {
       this.$router.push(({ path: `/movie/${dataset.index}` }))
     }
   },
-
-    computed:{
+  computed:{
        itemsPerCarousel(){
          var items = null
-      if (this.window.width < 600){
+      if (this.window.width < 700){
        items = 2
       }
-      else if (this.window.width < 800){
+      else if (this.window.width < 820){
         items = 3
       }
       else if (this.window.width < 1000){
@@ -127,65 +124,45 @@ export default {
       return items
     }
   },
-
-   destroyed() {
+  destroyed() {
 		window.removeEventListener("resize", this.handleResize);
 	},
 
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
-.sliderWrapper
+<style lang="scss" scoped>
+ @import '../assets/variables.scss';
+
+.sliderWrapper__header
 {
-  .VueCarousel-slide
+  margin-top:20px;
+  padding:10px;
+  .header__title 
   {
-  padding-left: 10px;
+  color:white;
+  font-size: 3em;
+  }
+  .header__tabsWrapper
+  {
+    font-size: 1.5em;
+    font-family: $second;
+    width:150px;
+    display: flex;
+    justify-content: space-between;
+    .active 
+    {
+      color:$red;
+      border-bottom: 2px solid $red;
+    }
+    span 
+    {
+      &:hover 
+      {
+        cursor: pointer;
+      }
+    }
   }
 }
-</style>
-
-<style scoped lang="scss">
-
-.sliderPadding{
-  padding-left:15px;
-  padding-right:15px;
-}
-a, a:active, a:visited
-{
-  color:white;
-  text-decoration: none;
-}
-
-.sliderWrapper
-{
-  padding-top: 100px;
-}
-.header__title
-{
-  font-size: 4em;
-}
-.header__tabsWrapper
-{
-  font-size: 2em;
-  padding:25px 0px;
-}
-
-a{
-   cursor: pointer;
-}
-  a.active {
-   
-    color:rgb(181, 3, 3);
-    text-shadow: 0 0px 7px rgba(181,3, 30, 0.35);
-    border-bottom: 2px solid rgb(181, 3, 3);
-    cursor: pointer;
-}
-.header__tabsWrapper_tab--2
-{
-  padding-left: 25px;
-}
-
 
 </style>

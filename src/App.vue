@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <Header/>
+    <Header class="header"/>
     <div class="mainContent">
    
         <router-view :key="$route.fullPath"/>
    
     </div>
-    <Footer/>
+    <Footer class="footer" />
   </div>
 </template>
 
@@ -25,40 +25,47 @@ export default {
 </script>
 
 <style lang="scss">
-a {
-  color:white;
-  text-decoration: none;
-}
-p{
-  margin:0px;
-  padding:0px;
-}
-
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color:white;
-  background: black;
-  
-}
-.mainContent
-{
+  @import './assets/variables.scss';
+    *{box-sizing: border-box;}
+      html,body{
+        padding:0px;
+        margin:0px;
+        background-color:$black;
+      }
+#app{
+  background:$black;
+  font-family: $main;
   max-width: 100vw;
 }
 
-button:active, button:focus, input:active, input:focus
+a, a:visited, a:focus, a:active
 {
-  outline:none;
+  text-decoration: none;
+  color:white;
 }
-.btn
+button 
 {
   border:none;
-  border-radius: 100px;
-  padding:15px 15px;
-   box-shadow: 0 5px 15px rgba(181, 3, 3, .4);
+  border-radius: 25px;
+  font-family:$second;
+  padding:5px 10px;
+}
+.red_btn 
+{
+  color:white;
+  background:$red;
+  box-shadow: 0 5px 15px rgba(189, 11, 11, .5);
 }
 
+.header, .footer 
+{
+  position: relative;
+  z-index: 102;
+}
 
+.mainContent
+{
+  position: relative;
+  z-index: 94;
+}
 </style>

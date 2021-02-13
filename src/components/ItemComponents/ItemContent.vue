@@ -35,7 +35,7 @@
          <div  v-else class="fullDesc">
          {{feed.biography}}
         </div>
-        <button  v-if="feed.overview != null" class="btn trailer-btn">Watch Trailer</button>
+        <button  v-if="feed.overview != null" class="btn red_btn">Watch Trailer</button>
       </div>
     </div>
   </div>
@@ -45,14 +45,14 @@
 
 export default {
   name: 'ItemContent',
- props: ['type'],
+  props: ['type'],
   data(){
     return{
        page:this.$route.params.id,
        feed:null
     }
   },
-     mounted(){
+  mounted(){
        window.scrollTo(0, 0)
        if (this.type === 'movie')
        {
@@ -75,160 +75,171 @@ export default {
           this.feed = response.data;
           })
        }
-  },
-
-     
+  }, 
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped lang="scss">
-.itemContentWrapper
-{
-  position: relative;
-  width:100vw;
-  min-height: 100vh;
-  height:auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  @import '../../assets/variables.scss';
+  .itemBackground
+  {
+    position: fixed;
+    width:100vw;
+    height:100vh;
+    max-width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    filter: blur(5px);
+  }
+  .itemBackground--overlay
+  {
+    position: fixed;
+    width:100vw;
+    height:100vh;
+    max-width: 100%;
+   background:rgba(0,0,0,.3);
+   z-index: 90;
 
-.itemBackground
-{
- 
-  top:0px;
-  width:100vw;
-  height: 100vh;
-  background-position: center;
-  filter: blur(10px);
-  position: fixed;
-}
-.itemBackground--overlay
-{
-  position: fixed;
-  z-index: 90;
-  width:100vw;
   
-  height:100vh;
-  top:0px;
-  left:0px;
-  background:rgba(0,0,0,.3)
-}
-
-.itemContent
-{
-  position: relative;
-  top:100px;
-  z-index: 99;
-
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  img 
-  { 
-    height:auto;
-    width: 60vw;
-    border-radius: 10px;
-    box-shadow: 2px 2px 19px 2px rgba(0,0,0,0.56);
-  } 
-}
-
-.itemContent__texts
-{
-  padding: 0px 15px; 
-  display: flex;
-  flex-direction: column;
-  .textsTitle
+  }
+  .itemContent
   {
-    font-size: 2.6em;
+   z-index: 94;
     color:white;
-    font-weight: bold;
-    padding:5px 10px;
-  }
-  .textsDate
-  {
-    font-size: 1.7em;
-    font-weight: 200;
-    padding:0px 10px;
-  }
-  .textsDetails
-  {
-    display: flex;
-    padding:10px 10px;
-   
-    .detailsCategory
-    {
-      font-weight: bold;
-    }
-  }
-  .rate
-  {
-    padding-top:5px;
-    .rateStar
-    {
-      font-size: 2.2em;
-    }
-    i 
-    {
-      color:gold;
-    }
-  }
-  .fullDesc
-  {
+    padding:15px;
     position: relative;
-    padding:5px;
-    max-height: 70vh;
-    font-size: 1.1em;
-    text-align: justify;
-    line-height: 1.45em;
-    
-  }
-}
-
-.trailer-btn
-{
-  margin-top:10px;
-  background:rgb(181, 3, 3);
-  color:white;
-  font-size:1em;
-  width:180px;
-}
-
-@media (min-width: 780px) {
-  .itemContent{
-    padding:0px 15px;
-    img
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100vw;
+    width:85vw;
+    padding-top: 70px;
+    margin: auto;
+    img 
     {
-      width:50vw;
+      width:100%;
+      height:auto;
+      border-radius: 15px;
     }
-    .itemContent__texts
+    .itemContent__texts 
+    {
+      .textsTitle 
       {
         padding-top: 10px;
-        
+        font-size:1.8em;
       }
-  }
-}
-
-@media (min-width: 1000px){
-  .itemContent{
-    flex-direction: row;
-    width:85vw;
-    align-items: flex-start;
-    img
+    }
+    .textsDetails
     {
-      width: 30vw;
-      max-width: 450px;
+      display: flex;
+    }
+    .rate
+    {
+      i 
+      {
+               color:$gold;
+          text-shadow: 0px 0px 10px rgba(255,238,0,.8);
+      }
     }
     .fullDesc
     {
-      max-width: 45vw;
-      overflow-y: auto;
+      padding:10px 0px;
+      font-size: 1.2em;
     }
-
+    .btn 
+    {
+      margin-top:10px;
+      font-size: 1.2em;
+    }
   }
-}
+ @media (min-width: 600px) {
+  .itemContent
+  {
+    z-index: 94;
+    color:white;
+    padding:15px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100vw;
+    width:90vw;
+    padding-top: 70px;
+    margin: auto;
+    img 
+    {
+      width:75%;
+      height:auto;
+      border-radius: 15px;
+    }
+  }
+ }
+  @media (min-width: 800px) {
+  .itemContent
+  {
+    z-index: 94;
+    color:white;
+    padding:15px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    max-width: 100vw;
+    width:90vw;
+    padding-top: 70px;
+    margin: auto;
+    img 
+    {
+      width:35%;
+      height:auto;
+      border-radius: 15px;
+    }
+    .itemContent__texts 
+    {
+      width:55%;
+      padding-left: 15px;
+      .textsTitle
+      {
+        font-size: 3em;
+      }
+    }
+  }
+  }
+   @media (min-width: 1000px){
+    .itemContent
+    {
+    z-index: 94;
+    color:white;
+    padding:15px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    max-width: 100vw;
+    width:70vw;
+    padding-top: 70px;
+    margin: auto;
+    img 
+    {
+      width:35%;
+      max-width: (95vw/4);
+      height:auto;
+      border-radius: 15px;
+     
+    }
+    .itemContent__texts 
+    {
+      width:45%;
+      padding-left: 15px;
+      font-size: 1.2em;
 
-
+      .textsTitle
+      {
+        font-size: 3.4em;
+      }
+    }
+  }
+   }
 </style>

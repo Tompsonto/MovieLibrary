@@ -1,5 +1,5 @@
 <template>
-  <div class="sliderWrapper sliderPadding" :key="this.$route.params.id">
+  <div class="sliderWrapper " :key="this.$route.params.id">
     <div class="sliderWrapper__header">
       <div class="header__title">{{title}}</div>
       <div class="header__tabsWrapper">
@@ -7,7 +7,7 @@
         <span class="header__tabsWrapper_tab--2"><a v-on:click="activeTab='crew'" v-bind:class="[ activeTab === 'crew' ? 'active' : '' ]">Crew</a></span>
       </div>
     </div>
-      <Carousel :perPage="4" :paginationEnabled="false"  :loop="true"   :navigationEnabled="false"    v-show="activeTab ==='cast'">
+      <Carousel :perPage="itemsPerCarousel" :paginationEnabled="false"  :loop="true"   :navigationEnabled="false"    v-show="activeTab ==='cast'">
       <Slide  v-for="(cast, i) in feed.cast" :key="i"
        :data-index="cast.id"
       @slideclick="handleSlideClickPerson">
@@ -16,7 +16,7 @@
      
       </Slide>
     </Carousel>
-    <Carousel :perPage="4" :paginationEnabled="false"  :loop="true"   :navigationEnabled="false"    v-show="activeTab ==='crew'">
+    <Carousel :perPage="itemsPerCarousel" :paginationEnabled="false"  :loop="true"   :navigationEnabled="false"    v-show="activeTab ==='crew'">
       <Slide v-for="(crew, i) in feed.crew" :key="i"
           
           :data-index="crew.id"
@@ -43,7 +43,15 @@ export default {
       feed:null,
       page:this.$route.params.id,
       activeTab: 'cast',
+      window: {
+			width: 0,
+			height: 0
+      },
     }
+  },
+  created(){
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
   },
   mounted(){
       window.scrollTo(0, 0)
@@ -62,46 +70,74 @@ export default {
         })
       }
   },
+  computed:{
+       itemsPerCarousel(){
+         var items = null
+      if (this.window.width < 600){
+       items = 2
+      }
+      else if (this.window.width < 800){
+        items = 3
+      }
+      else if (this.window.width < 1000){
+        items = 4
+      }
+      else{
+        items = 5
+      }
+      return items
+    }
+  },
   methods:{
+    handleResize() {
+			this.window.width = window.innerWidth;
+			this.window.height = window.innerHeight;
+    },
       handleSlideClickPerson (dataset)  {
       this.$router.push(({ path: `/person/${dataset.index}` }))
     },
 
-  }
+  },
+  destroyed(){
+		window.removeEventListener("resize", this.handleResize);
+	},
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped lang="scss">
-.sliderPadding{
-  padding-left:15px;
-  padding-right:15px;
-}
-.sliderWrapper
+ @import '../../assets/variables.scss';
+
+.sliderWrapper__header
 {
-  padding-top: 100px;
-}
-.header__title
-{
-  font-size: 4em;
-}
-.header__tabsWrapper
-{
-  font-size: 2em;
-  padding:25px 0px;
+  margin-top:20px;
+  padding:10px;
+  .header__title 
+  {
+  color:white;
+  font-size: 3em;
+  }
+  .header__tabsWrapper
+  {
+    font-size: 1.5em;
+    font-family: $second;
+    width:120px;
+    display: flex;
+    justify-content: space-between;
+    .active 
+    {
+      color:$red;
+      border-bottom: 2px solid $red;
+    }
+    span 
+    {
+      &:hover 
+      {
+        cursor: pointer;
+      }
+    }
+  }
 }
 
-a{
-   cursor: pointer;
-}
-  a.active {
-   
-    color: #484848;
-    border-bottom: 2px solid rgb(181, 3, 3);
-    cursor: pointer;
-}
-.header__tabsWrapper_tab--2
-{
-  padding-left: 25px;
-}
+
 </style>

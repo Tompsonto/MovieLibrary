@@ -1,5 +1,5 @@
 <template>
-  <div class="footer basePadding">
+  <div class="footer">
     <div class="footer__legal">Created by Tomasz Szymanczak <br>
      with Vue and <a style="text-decoration:underline"  href="https://www.themoviedb.org/" target="_blank">The Movie Database API</a>
      </div>
@@ -14,23 +14,20 @@
 <script>
 export default {
   name: 'Footer',
-
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .footer 
 {
-  position: relative;
-  z-index: 100;
-  padding:15px;
-  background:black;
+  margin-top: 50px;
+  width:100vw;
+  max-width: 100%;
   display: flex;
   justify-content: space-between;
-      i 
-    {
-      font-size: 2em;
-    }
+  align-items: center;
+  padding:10px;
+  font-size: 1em;
+  color:white;
 }
 </style>
