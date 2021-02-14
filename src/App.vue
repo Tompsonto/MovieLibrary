@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Header class="header"/>
+
     <div class="mainContent">
    
         <router-view :key="$route.fullPath"/>
@@ -17,6 +18,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 export default {
   name: 'App',
+
   components:{
     Header,
     Footer
@@ -35,7 +37,7 @@ export default {
 #app{
   background:$black;
   font-family: $main;
-  max-width: 100vw;
+  max-width: 100%;
 }
 
 a, a:visited, a:focus, a:active
@@ -49,7 +51,12 @@ button
   border-radius: 25px;
   font-family:$second;
   padding:5px 10px;
+  &:active, &:visited, &:focus 
+  {
+    outline: none;
+  }
 }
+
 .red_btn 
 {
   color:white;
@@ -63,9 +70,11 @@ button
   z-index: 102;
 }
 
+
 .mainContent
 {
   position: relative;
   z-index: 94;
+  min-height: 100vh;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="item-wrapper">
       <ItemContent class="content" type="person"/>
-      <Slider class="slider" title="Known from" types="credits"/>
+      <SliderNew  title="Known from"  class="TeamSlider" category="personCredits"/>
    
   </div>
 </template>
@@ -10,14 +10,14 @@
 
 
 import ItemContent from '../components/ItemComponents/ItemContent'
-import Slider from '../components/Slider'
+import SliderNew from '../components/SliderNew'
 
 
 export default {
   name: 'Person',
   components: {
     ItemContent,
-    Slider
+    SliderNew
   }
 }
 </script>

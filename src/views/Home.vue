@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <HeroSlider/>
-    <Slider  title="Popular" types="popular"/>
-    <Slider  title="Upcoming" types="upcoming"/>
-     <Slider title="Top Rated" types="top_rated"/>
+    <SliderNew  title="Popular" category="popular"/>
+    <SliderNew  title="Upcoming" category="upcoming"/>
+    <SliderNew  title="Top Rated" category="top_rated"/>
   </div>
 </template>
 
@@ -15,7 +15,8 @@ export default {
   name: 'Home',
   components: {
     HeroSlider: () => import("../components/HeroSlider"),
-    Slider: () => import("../components/Slider")
+    
+    SliderNew: () => import("../components/SliderNew")
   }
 }
 </script>

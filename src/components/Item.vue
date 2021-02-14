@@ -6,6 +6,7 @@
 
     <div v-if="feed.title != null" class="slide__content movie">
       <span class="slide__content__title">{{feed.title}}</span>
+      
       <span class="desc__stars"  v-if="feed.vote_average != null">
         <i class="fas fa-star"></i>{{feed.vote_average}}
       </span>

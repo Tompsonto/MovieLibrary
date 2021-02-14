@@ -1,21 +1,25 @@
 <template>
   <div class="itemContentWrapper" :key="this.$route.params.id">
-    <div class="itemBackground" v-bind:style="{ 'background-image': 'url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/' + feed.backdrop_path + ')' }"></div>
+    <div v-if="feed.backdrop_path != null" class="itemBackground" v-bind:style="{ 'background-image': 'url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/' + feed.backdrop_path + ')' }"></div>
     <div class="itemBackground--overlay"></div>
     <div class="itemContent ">
+      <!--Image-->
          <img  v-if="feed.poster_path != null"  :src="'https://image.tmdb.org/t/p/w1280/'+ feed.poster_path">
-         <img v-else :src="'https://image.tmdb.org/t/p/w1280/'+ feed.profile_path">
+         <img  v-else :src="'https://image.tmdb.org/t/p/w1280/'+ feed.profile_path">
+
       <div class="itemContent__texts">
+        <!--name/title-->
         <div v-if="feed.title != null"  class="textsTitle">{{feed.title}}</div>
         <div  v-else class="textsTitle">{{feed.name}}</div>
         <div>
-
+        <!--date-->
           <div  v-if="feed.release_date != null" class="textsDate">{{feed.release_date}}</div>
-          <div v-else class="textsDate">{{feed.birthday}}</div>
-
+          <div v-else class="textsDate">{{feed.birthday}} <span v-if="feed.deathday != null">- {{feed.deathday}}</span></div>
+        <!--movie details-->
           <div class="textsDetails"  v-if="feed.runtime != null">
             <span class="detailsLong">{{feed.runtime}}</span> | 
             <div class="detailsCategory">
+
               <span class="category" v-for="(cat, i) in feed.genres" :key="i"  >
                 {{cat.name}}
               </span>
@@ -29,15 +33,21 @@
             </span>/ 10
           </div>
         </div>
+        <!--desc-->
         <div  v-if="feed.overview != null" class="fullDesc">
          {{feed.overview}}
         </div>
          <div  v-else class="fullDesc">
          {{feed.biography}}
         </div>
-        <button  v-if="feed.overview != null" class="btn red_btn">Watch Trailer</button>
+
+     
+        
+        
+     
       </div>
     </div>
+   
   </div>
 </template>
 
@@ -49,9 +59,12 @@ export default {
   data(){
     return{
        page:this.$route.params.id,
-       feed:null
+       feed:null,
+       trailer:null,
+   
     }
   },
+
   mounted(){
        window.scrollTo(0, 0)
        if (this.type === 'movie')
@@ -60,6 +73,7 @@ export default {
           .then(response => {
           this.feed = response.data;
           })
+         
        }
        else if (this.type === 'person')
        {
@@ -82,6 +96,11 @@ export default {
 
 <style scoped lang="scss">
   @import '../../assets/variables.scss';
+  .modal 
+  {
+    position: fixed;
+    z-index: 1000;
+  }
   .itemBackground
   {
     position: fixed;

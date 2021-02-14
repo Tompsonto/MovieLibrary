@@ -1,0 +1,51 @@
+<!--alltypes-->
+movie
+tv
+person
+
+<!--popular-->
+movies
+https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=en-US&page=1
+
+series
+https://api.themoviedb.org/3/tv/popular?api_key=<<api_key>>&language=en-US&page=1
+
+<!--upcoming-->
+movies
+https://api.themoviedb.org/3/movie/upcoming?api_key=<<api_key>>&language=en-US&page=1
+
+series
+https://api.themoviedb.org/3/tv/airing_today?api_key=<<api_key>>&language=en-US&page=1
+
+
+<!--top rated-->
+movies
+https://api.themoviedb.org/3/movie/top_rated?api_key=<<api_key>>&language=en-US&page=1
+
+series
+https://api.themoviedb.org/3/tv/top_rated?api_key=<<api_key>>&language=en-US&page=1
+
+
+<!--cast/crew-->
+movies
+https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=<<api_key>>&language=en-US
+
+series
+https://api.themoviedb.org/3/tv/{tv_id}/credits?api_key=<<api_key>>&language=en-US
+
+<!--related for movies-->
+movies
+https://api.themoviedb.org/3/movie/{movie_id}/similar?api_key=<<api_key>>&language=en-US&page=1
+
+
+<!--related for series-->
+series
+https://api.themoviedb.org/3/tv/{tv_id}/similar?api_key=<<api_key>>&language=en-US&page=1
+
+
+<!--person credits-->
+movies
+https://api.themoviedb.org/3/person/{person_id}/movie_credits?api_key=<<api_key>>&language=en-US
+
+series
+https://api.themoviedb.org/3/person/{person_id}/tv_credits?api_key=<<api_key>>&language=en-US

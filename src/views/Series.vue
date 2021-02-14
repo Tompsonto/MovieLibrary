@@ -1,8 +1,9 @@
 <template>
   <div class="item-wrapper">
       <ItemContent  class="content" type="series"/>
-      <ItemTeamSlider class="TeamSlider"  types="popular" />
-      <Slider class="slider" title="Related" types="related"/>
+      <SliderNew  title="Cast/Crew"  class="TeamSlider" category="castCrewTv"/>
+    
+    <SliderNew  title="Related TV"  class="TeamSlider" category="relatedTv"/>
   </div>
 </template>
 
@@ -10,14 +11,14 @@
 
 
 import ItemContent from '../components/ItemComponents/ItemContent'
-import ItemTeamSlider from '../components/ItemComponents/ItemTeamSlider'
-import Slider from '../components/Slider'
+
+import SliderNew from '../components/SliderNew'
 export default {
   name: 'Series',
   components: {
     ItemContent,
-    ItemTeamSlider,
-    Slider
+
+    SliderNew
   }
 }
 </script>
