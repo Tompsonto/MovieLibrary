@@ -2,6 +2,7 @@
 Site created with Vue.js and Movie Database API. 
 Provide informations about movies, tv series, actors and the others.
 
+LIVE: https://movie-library-khaki.vercel.app/
 
 ## Project setup
 ```
