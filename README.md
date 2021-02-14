@@ -1,4 +1,7 @@
-# movielibs
+# MovieLibrary 
+Site created with Vue.js and Movie Database API. 
+Provide informations about movies, tv series, actors and the others.
+
 
 ## Project setup
 ```
@@ -19,6 +22,13 @@ npm run build
 ```
 npm run lint
 ```
+### Database API
+To run project locally you need API key from https://www.themoviedb.org/ .
+Then you should create file .env with code 
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
+VUE_APP_API_KEY="APIKEY"
+
+```
+
+
