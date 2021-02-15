@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Spinner/>
     <Header class="header"/>
 
     <div class="mainContent">
@@ -16,12 +17,14 @@
 <script>
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Spinner from './components/Spinner'
 export default {
   name: 'App',
 
   components:{
     Header,
-    Footer
+    Footer,
+    Spinner
   }
 }
 </script>

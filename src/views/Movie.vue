@@ -1,12 +1,15 @@
 <template>
+
   <div class="item-wrapper">
+   
     <ItemContent  class="content" type="movie"/>
  
     <SliderNew  title="Cast/Crew"  class="TeamSlider" category="castCrewMovie"/>
     <SliderNew  title="Related Movies"  class="TeamSlider" category="relatedMovies"/>
-   
+    
   
   </div>
+
 </template>
 
 <script>
@@ -19,8 +22,6 @@ export default {
   name: 'Movie',
   components: {
     ItemContent,
-
-   
     SliderNew
   }
 }

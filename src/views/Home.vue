@@ -17,7 +17,8 @@ export default {
     HeroSlider: () => import("../components/HeroSlider"),
     
     SliderNew: () => import("../components/SliderNew")
-  }
+  },
+
 }
 </script>
 

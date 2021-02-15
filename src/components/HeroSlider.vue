@@ -24,6 +24,7 @@
     </div>
     </Slide>
   </Carousel>
+
 </div>
 </template>
 
@@ -82,6 +83,8 @@ export default {
 
 <style scoped lang="scss">
  @import '../assets/variables.scss';
+
+
 .heroSlider 
 {
   width:100vw;
@@ -153,6 +156,13 @@ export default {
     width:95vw;
     height:95vh;
     padding:20px;
+    .heroStarsWrapper
+    {
+      display: flex;
+      justify-content: space-between;
+      width: 15%;
+      font-size:1.3em;
+    }
     .heroStarsWrapper__start 
     {
       font-size: 1.5em;
@@ -191,15 +201,27 @@ export default {
     width:95vw;
     height:95vh;
     padding:10px 45px;
+    .heroStarsWrapper
+    {
+      display: flex;
+      justify-content: space-between;
+      width: 15%;
+      font-size:1.3em;
+    }
     .heroStarsWrapper__start 
     {
-      font-size: 1.3em;
+      
+      font-size: 1.7em;
       i 
       {
         color:$gold;
         text-shadow: 0px 0px 10px rgba(255,238,0,.8);
         
       }
+    }
+    .heroStarsWrapper__date
+    {
+      font-size: 1.7em;
     }
     .heroContent__title
     {

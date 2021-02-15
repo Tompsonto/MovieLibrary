@@ -40,11 +40,6 @@
          <div  v-else class="fullDesc">
          {{feed.biography}}
         </div>
-
-     
-        
-        
-     
       </div>
     </div>
    
@@ -96,11 +91,7 @@ export default {
 
 <style scoped lang="scss">
   @import '../../assets/variables.scss';
-  .modal 
-  {
-    position: fixed;
-    z-index: 1000;
-  }
+
   .itemBackground
   {
     position: fixed;
