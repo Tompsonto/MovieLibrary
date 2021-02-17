@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <footer class="footer">
     <div class="footer__legal">Created by Tomasz Szymanczak <br>
      with Vue and <a style="text-decoration:underline"  href="https://www.themoviedb.org/" target="_blank">The Movie Database API</a>
      </div>
@@ -8,7 +8,7 @@
   <i class="fab fa-github"></i></a>
     </div>
 
-  </div>
+  </footer>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 
 <template>
-  <div class="nav-wrapper">
+  <header class="nav-wrapper">
     <div class="logo">
       <router-link to="/">
       MovieLib
@@ -45,7 +45,7 @@
       </ul>
     </div>
 
-  </div>
+  </header>
 </template>
 
 <script>
