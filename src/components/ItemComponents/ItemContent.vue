@@ -1,6 +1,6 @@
 <template>
   <div class="itemContentWrapper" :key="this.$route.params.id">
-    <div v-if="feed.backdrop_path != null" class="itemBackground" v-bind:style="{ 'background-image': 'url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/' + feed.backdrop_path + ')' }"></div>
+    <div v-if="feed.backdrop_path != null " class="itemBackground" v-bind:style="{ 'background-image': 'url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/' + feed.backdrop_path + ')' }"></div>
     <div class="itemBackground--overlay"></div>
     <div class="itemContent ">
       <!--Image-->

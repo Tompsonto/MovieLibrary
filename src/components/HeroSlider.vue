@@ -1,7 +1,7 @@
 <template>
 <div>
-
-  <Carousel class="heroSlider"  :paginationEnabled="true" :autoplay="false" :loop="true">
+  <Loader v-if="isLoading"/>
+  <Carousel v-else class="heroSlider"  :paginationEnabled="true" :autoplay="false" :loop="true">
     <Slide class="heroSlide" v-for="(movie, i) in feed.slice(0, 8)" :key="i" v-bind:style="{ 'background-image': 'url(https://image.tmdb.org/t/p/w1280/'+ movie.backdrop_path + ')' }">
     <div class="heroOverlay"></div>
     <div class="heroContent">
@@ -31,18 +31,20 @@
 <script>
 //
 import { Carousel, Slide } from 'vue-carousel';
-
+import Loader from './common/Loader'
 export default {
   name: 'HeroSlider',
   components:{
        Carousel,
        Slide,
+       Loader
 
   },
   data(){
     return{
         feed:null,
-        loading:true
+        isLoading:true
+
     }
   },
   filters: {
@@ -59,8 +61,8 @@ export default {
       .then(response => {
         this.feed = response.data.results;
        
-      })
-      this.loading = false;
+      }).finally(()=>{setTimeout(()=>{this.isLoading = false }, 1000);})
+      
   }
 }
 </script>
@@ -159,9 +161,12 @@ export default {
     .heroStarsWrapper
     {
       display: flex;
-      justify-content: space-between;
-      width: 15%;
+      align-items: baseline;
       font-size:1.3em;
+      .heroStarsWrapper__date
+      {
+        margin-left: 15px;
+      }
     }
     .heroStarsWrapper__start 
     {
@@ -204,8 +209,8 @@ export default {
     .heroStarsWrapper
     {
       display: flex;
-      justify-content: space-between;
-      width: 15%;
+      align-items: baseline;
+ 
       font-size:1.3em;
     }
     .heroStarsWrapper__start 
@@ -221,6 +226,7 @@ export default {
     }
     .heroStarsWrapper__date
     {
+      margin-left: 15px;
       font-size: 1.7em;
     }
     .heroContent__title

@@ -10,7 +10,8 @@
         
       </div>
     </div>
-    <Carousel  :perPage="itemsPerCarousel" :paginationEnabled="false" :navigate-to="4" :navigationEnabled="false"  :loop="true"  v-show="activeTab ==='movies'">
+ 
+    <Carousel :perPage="itemsPerCarousel" :paginationEnabled="false" :navigate-to="4" :navigationEnabled="false"  :loop="true"  v-show="activeTab ==='movies'">
       <Slide v-for="(movie, i) in movies" :key="i"
       :data-index="movie.id"
       @slideclick="handleSlideClickMovie">
@@ -30,7 +31,7 @@
       </Slide>
     </Carousel>
 
-    <Carousel  :perPage="itemsPerCarousel" :paginationEnabled="false"  :loop="true"  :navigate-to="4"   :navigationEnabled="false"    v-show="activeTab ==='cast'">
+    <Carousel :perPage="itemsPerCarousel" :paginationEnabled="false"  :loop="true"  :navigate-to="4"   :navigationEnabled="false"    v-show="activeTab ==='cast'">
       <Slide v-for="(caste, i) in cast" :key="i"  
        :data-index="caste.id"
         @slideclick="handleSlideClickPerson">
@@ -39,7 +40,8 @@
          
       </Slide>
     </Carousel>
-    <Carousel  :perPage="itemsPerCarousel" :paginationEnabled="false"  :loop="true"  :navigate-to="4"   :navigationEnabled="false"    v-show="activeTab ==='crew'">
+    
+    <Carousel :perPage="itemsPerCarousel" :paginationEnabled="false"  :loop="true"  :navigate-to="4"   :navigationEnabled="false"    v-show="activeTab ==='crew'">
       <Slide v-for="(crewe, i) in crew" :key="i"  
        :data-index="crewe.id"
         @slideclick="handleSlideClickPerson">
@@ -55,12 +57,15 @@
 
 const baselink = "https://api.themoviedb.org/3/"
 import { Carousel, Slide } from 'vue-carousel';
+
+import Item from './Item'
 export default {
   props: ['title','category'],
   components:{
-      Item: () => import("./Item"),
+      Item,
        Carousel,
-       Slide
+       Slide,
+       
   },
   data(){
     return{
@@ -72,7 +77,8 @@ export default {
       activeTab: 'movies',
       window: {
 			width: 0,
-			height: 0
+			height: 0,
+
       },
     }
   },
@@ -104,7 +110,7 @@ export default {
        this.axios.get(baselink+'movie/upcoming?api_key='+process.env.VUE_APP_API_KEY+'&language=en-US&page=1')
         .then(response => {
        this.movies = response.data.results;
-        })
+        }).finally(()=>{this.isLoading = false})
         this.axios.get(baselink+'tv/airing_today?api_key='+process.env.VUE_APP_API_KEY+'&language=en-US&page=1')
         .then(response => {
        this.tv = response.data.results;
@@ -119,7 +125,7 @@ export default {
         this.cast = response.data.cast;
        this.crew = response.data.crew;
      
-        })
+        }).finally(()=>{this.isLoading = false})
         this.activeTab = 'cast'
     }
       //cast/crew Tv
@@ -128,7 +134,7 @@ export default {
         .then(response => {
        this.cast = response.data.cast;
        this.crew = response.data.crew;
-        }) 
+        })
         this.activeTab = 'cast'
     }
     //related movies
